@@ -1,3 +1,6 @@
+pip install pandas bokeh
+pip show pandas bokeh
+
 import pandas as pd
 import streamlit as st
 from bokeh.plotting import figure
