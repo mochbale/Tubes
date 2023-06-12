@@ -1,5 +1,7 @@
-pip install pandas bokeh
-pip show pandas bokeh
+pip install pandas streamlit bokeh
+
+pip show pandas streamlit bokeh
+
 
 import pandas as pd
 import streamlit as st
