@@ -2,14 +2,10 @@ import pandas as pd
 import streamlit as st
 from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
-import requests
 
-# URL dataset di GitHub
+# Membaca dataset
 url = 'https://raw.githubusercontent.com/nama_pengguna/nama_repo/nama_branch/nama_file.csv'
-
-# Membaca dataset dari URL
-response = requests.get(url)
-data = pd.read_csv(io.StringIO(response.text))
+data = pd.read_csv(url)
 
 # Membuat data source
 source = ColumnDataSource(data)
