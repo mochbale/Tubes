@@ -2,11 +2,14 @@ import pandas as pd
 import streamlit as st
 from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
-from bokeh.io import curdoc
+import requests
 
-# Membaca dataset
-url = 'https://raw.githubusercontent.com/mochbale/Tubes/main/Dataset2.csv'
-data = pd.read_csv(url)
+# URL dataset di GitHub
+url = 'https://raw.githubusercontent.com/nama_pengguna/nama_repo/nama_branch/nama_file.csv'
+
+# Membaca dataset dari URL
+response = requests.get(url)
+data = pd.read_csv(io.StringIO(response.text))
 
 # Membuat data source
 source = ColumnDataSource(data)
@@ -31,4 +34,3 @@ st.bokeh_chart(plot)
 
 # Menampilkan tabel dataset
 st.write(data)
-
