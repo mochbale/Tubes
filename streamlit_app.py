@@ -4,7 +4,7 @@ from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
 
 # Membaca dataset
-url = 'https://raw.githubusercontent.com/nama_pengguna/nama_repo/nama_branch/nama_file.csv'
+url = 'https://raw.githubusercontent.com/mochbale/Tubes/main/Dataset2.csv'
 data = pd.read_csv(url)
 
 # Membuat data source
