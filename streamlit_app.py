@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 from bokeh.io import show
-from bokeh.models import ColumnDataSource
+from bokeh.models import ColumnDataSource, NumeralTickFormatter
 from bokeh.plotting import figure
 
 # baca dataset dari tautan GitHub
