@@ -8,17 +8,20 @@ from bokeh.plotting import figure
 df = pd.read_csv('https://raw.githubusercontent.com/mochbale/Tubes/main/Dataset2.csv')
 
 df_indonesia = df[df['Area'] == 'Indonesia']
+df_malaysia = df[df['Area'] == 'Malaysia']
 
-source = ColumnDataSource(df_indonesia)
+source_indonesia = ColumnDataSource(df_indonesia)
+source_malaysia = ColumnDataSource(df_malaysia)
 
-p = figure(title="Penghasilan Beras di Indonesia", x_axis_label='Tahun', y_axis_label='Penghasilan (Ton)')
-p.line(x='Year', y='Value', source=source)
+p = figure(title="Penghasilan Beras di Indonesia dan Malaysia", x_axis_label='Tahun', y_axis_label='Penghasilan (Ton)')
+p.line(x='Year', y='Value', source=source_indonesia, legend_label="Indonesia", color="blue")
+p.line(x='Year', y='Value', source=source_malaysia, legend_label="Malaysia", color="red")
 
 # atur format tampilan angka pada sumbu y
 p.yaxis[0].formatter = NumeralTickFormatter(format="0,0")
 
 # tambahkan alat HoverTool ke plot
-hover = HoverTool(tooltips=[("Tahun", "@Year"), ("Penghasilan", "@Value{0,0} Ton")])
+hover = HoverTool(tooltips=[("Negara", "@Area"), ("Tahun", "@Year"), ("Penghasilan", "@Value{0,0} Ton")])
 p.add_tools(hover)
 
 # tambahkan spasi antara judul dan plot
