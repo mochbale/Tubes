@@ -15,7 +15,8 @@ source = ColumnDataSource(df_indonesia)
 p = figure(title="Penghasilan Beras di Indonesia", x_axis_label='Tahun', y_axis_label='Penghasilan')
 p.line(x='Year', y='Value', source=source)
 
-select = Select(title="Pilih Tahun:", value="1961", options=df_indonesia['Year'].unique().tolist())
+select = Select(title="Pilih Tahun:", value="1961", options=[str(year) for year in df_indonesia['Year'].unique()])
+
 
 def update_plot(attr, old, new):
     selected_year = select.value
