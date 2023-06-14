@@ -11,7 +11,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/mochbale/Tubes/main/Dataset2
 # daftar negara di Asia Tenggara
 countries = ['Brunei Darussalam', 'Cambodia', 'Indonesia', "Lao People's Democratic Republic", 'Malaysia', 'Myanmar', 'Philippines', 'Singapore', 'Thailand', 'Viet Nam']
 
-p = figure(title="Penghasilan Beras di Asia Tenggara", x_axis_label='Tahun', y_axis_label='Penghasilan (Ton)')
+p = figure(title="Penghasilan Beras di Asia Tenggara 1961~2021", x_axis_label='Tahun', y_axis_label='Penghasilan (Ton)')
 
 # tambahkan garis untuk setiap negara
 for i, country in enumerate(countries):
