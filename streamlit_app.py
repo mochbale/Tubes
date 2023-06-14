@@ -11,14 +11,14 @@ df_indonesia = df[df['Area'] == 'Indonesia']
 
 source = ColumnDataSource(df_indonesia)
 
-p = figure(title="Penghasilan Beras di Indonesia", x_axis_label='Tahun', y_axis_label='Penghasilan')
+p = figure(title="Penghasilan Beras di Indonesia", x_axis_label='Tahun', y_axis_label='Penghasilan (Ton)')
 p.line(x='Year', y='Value', source=source)
 
 # atur format tampilan angka pada sumbu y
 p.yaxis[0].formatter = NumeralTickFormatter(format="0,0")
 
 # tambahkan alat HoverTool ke plot
-hover = HoverTool(tooltips=[("Tahun", "@Year"), ("Penghasilan", "@Value{0,0}")])
+hover = HoverTool(tooltips=[("Tahun", "@Year"), ("Penghasilan", "@Value{0,0} Ton")])
 p.add_tools(hover)
 
 st.bokeh_chart(p)
