@@ -23,7 +23,7 @@ callback = CustomJS(args=dict(source=source, select=select), code="""
     var selected_year = select.value;
     var new_data = {'Area': [], 'Year': [], 'Unit': [], 'Value': [], 'Flag': [], 'Flag Description': []};
     for (var i = 0; i < data['Year'].length; i++) {
-        if (data['Year'][i] == selected_year) {
+        if (data['Year'][i].toString() == selected_year) {
             new_data['Area'].push(data['Area'][i]);
             new_data['Year'].push(data['Year'][i]);
             new_data['Unit'].push(data['Unit'][i]);
