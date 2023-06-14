@@ -1,32 +1,28 @@
 import pandas as pd
 import streamlit as st
+from bokeh.io import show
+from bokeh.models import ColumnDataSource, Select
 from bokeh.plotting import figure
-from bokeh.models import ColumnDataSource
+from bokeh.layouts import column
 
-# Membaca dataset
-url = 'https://raw.githubusercontent.com/mochbale/Tubes/main/Dataset2.csv'
-data = pd.read_csv(url)
+# baca dataset dari tautan GitHub
+df = pd.read_csv('https://raw.githubusercontent.com/mochbale/Tubes/main/Dataset2.csv')
 
-# Membuat data source
-source = ColumnDataSource(data)
+df_indonesia = df[df['Area'] == 'Indonesia']
 
-# Membuat plot
-plot = figure(x_range=data['Year'].unique(), plot_height=400, plot_width=800, title='Penghasilan Beras di Asia',
-              x_axis_label='Tahun', y_axis_label='Penghasilan (Unit)')
-plot.vbar(x='Year', top='Value', width=0.9, source=source)
+source = ColumnDataSource(df_indonesia)
 
-# Menambahkan judul plot dan label sumbu
-plot.title.align = 'center'
-plot.title.text_font_size = '18px'
-plot.xaxis.axis_label_text_font_size = '14px'
-plot.yaxis.axis_label_text_font_size = '14px'
+p = figure(title="Penghasilan Beras di Indonesia", x_axis_label='Tahun', y_axis_label='Penghasilan')
+p.line(x='Year', y='Value', source=source)
 
-# Mengatur tampilan plot
-plot.xgrid.grid_line_color = None
-plot.y_range.start = 0
+select = Select(title="Pilih Tahun:", value="1961", options=df_indonesia['Year'].unique().tolist())
 
-# Menampilkan plot menggunakan Streamlit
-st.bokeh_chart(plot)
+def update_plot(attr, old, new):
+    selected_year = select.value
+    new_data = df_indonesia[df_indonesia['Year'] == selected_year]
+    source.data = new_data
 
-# Menampilkan tabel dataset
-st.write(data)
+select.on_change('value', update_plot)
+
+layout = column(select, p)
+st.bokeh_chart(layout)
