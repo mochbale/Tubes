@@ -1,8 +1,7 @@
 import pandas as pd
 import streamlit as st
 from bokeh.io import show
-from bokeh.models import ColumnDataSource, CustomJS
-from bokeh.models.widgets import Select
+from bokeh.models import ColumnDataSource, Select
 from bokeh.plotting import figure
 from bokeh.layouts import column
 
@@ -18,24 +17,13 @@ p.line(x='Year', y='Value', source=source)
 
 select = Select(title="Pilih Tahun:", value="1961", options=[str(year) for year in df_indonesia['Year'].unique()])
 
-callback = CustomJS(args=dict(source=source, select=select), code="""
-    var data = source.data;
-    var selected_year = select.value;
-    var new_data = {'Area': [], 'Year': [], 'Unit': [], 'Value': [], 'Flag': [], 'Flag Description': []};
-    for (var i = 0; i < data['Year'].length; i++) {
-        if (data['Year'][i].toString() == selected_year) {
-            new_data['Area'].push(data['Area'][i]);
-            new_data['Year'].push(data['Year'][i]);
-            new_data['Unit'].push(data['Unit'][i]);
-            new_data['Value'].push(data['Value'][i]);
-            new_data['Flag'].push(data['Flag'][i]);
-            new_data['Flag Description'].push(data['Flag Description'][i]);
-        }
-    }
-    source.data = new_data;
-""")
 
-select.js_on_change('value', callback)
+def update_plot(attr, old, new):
+    selected_year = select.value
+    new_data = df_indonesia[df_indonesia['Year'] == selected_year]
+    source.data = new_data
+
+select.on_change('value', update_plot)
 
 layout = column(select, p)
 st.bokeh_chart(layout)
