@@ -21,4 +21,9 @@ p.yaxis[0].formatter = NumeralTickFormatter(format="0,0")
 hover = HoverTool(tooltips=[("Tahun", "@Year"), ("Penghasilan", "@Value{0,0} Ton")])
 p.add_tools(hover)
 
+# tambahkan spasi antara judul dan plot
+p.title.align = 'center'
+p.title.text_font_size = '16pt'
+p.title.offset = 20
+
 st.bokeh_chart(p)
