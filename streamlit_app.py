@@ -18,7 +18,7 @@ df_country = df[df['Area'] == selected_country]
 source_country = ColumnDataSource(df_country)
 
 # buat plot baru untuk negara yang dipilih dengan lebar dan tinggi yang ditentukan
-p = figure(title=f"Penghasilan Beras di {selected_country} 1961~2021", x_axis_label='Tahun', y_axis_label='Penghasilan (Ton)', plot_width=600, plot_height=400)
+p = figure(title=f"Penghasilan Beras di {selected_country} 1961~2021", x_axis_label='Tahun', y_axis_label='Penghasilan (Ton)', plot_width=900, plot_height=600)
 p.line(x='Year', y='Value', source=source_country, legend_label=selected_country, color=Category10[10][0])
 
 # atur format tampilan angka pada sumbu y
