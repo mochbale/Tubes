@@ -22,7 +22,7 @@ start_year, end_year = st.slider('Pilih Rentang Tahun:', min_year, max_year, (mi
 df = df[(df['Year'] >= start_year) & (df['Year'] <= end_year)]
 
 # buat plot baru dengan lebar dan tinggi yang ditentukan
-p = figure(title="Penghasilan Beras di Asia Tenggara 1961~2021", x_axis_label='Tahun', y_axis_label='Penghasilan (Ton)', plot_width=320, plot_height=680)
+p = figure(title="Penghasilan Beras di Asia Tenggara 1961~2021", x_axis_label='Tahun', y_axis_label='Penghasilan (Ton)', plot_width=920, plot_height=680)
 
 if selected_country == 'Semua Negara':
     # tampilkan semua negara
