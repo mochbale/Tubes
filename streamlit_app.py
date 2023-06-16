@@ -21,8 +21,11 @@ start_year, end_year = st.slider('Pilih Rentang Tahun:', min_year, max_year, (mi
 # filter DataFrame untuk hanya menyertakan data untuk rentang tahun yang dipilih
 df = df[(df['Year'] >= start_year) & (df['Year'] <= end_year)]
 
-# hitung rata-rata penghasilan beras untuk rentang tahun yang dipilih
-avg_production = df['Value'].mean()
+# hitung rata-rata penghasilan beras untuk rentang tahun yang dipilih dan negara yang dipilih
+if selected_country == 'Semua Negara':
+    avg_production = df['Value'].mean()
+else:
+    avg_production = df[df['Area'] == selected_country]['Value'].mean()
 st.write(f"Rata-rata Penghasilan Beras: {avg_production:,.0f} Ton")
 
 # buat plot baru dengan lebar dan tinggi yang ditentukan
