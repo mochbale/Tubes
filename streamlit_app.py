@@ -28,6 +28,17 @@ else:
     avg_production = df[df['Area'] == selected_country]['Value'].mean()
 st.write(f"Rata-rata Penghasilan Beras: {avg_production:,.0f} Ton")
 
+# hitung total penghasilan beras untuk setiap negara di Asia Tenggara dari tahun 1961 hingga 2021
+total_production = df.groupby('Area')['Value'].sum().reset_index()
+
+# urutkan negara berdasarkan total penghasilan beras dan ambil tiga negara teratas
+top_countries = total_production.sort_values(by='Value', ascending=False).head(3)
+
+# tampilkan tiga negara teratas dan total produksi beras mereka
+st.write("Top 3 Negara Penghasil Beras:")
+for i, row in top_countries.iterrows():
+    st.write(f"{row['Area']}: {row['Value']:,.0f} Ton")
+
 # buat plot baru dengan lebar dan tinggi yang ditentukan
 p = figure(title="Penghasilan Beras di Asia Tenggara 1961~2021", x_axis_label='Tahun', y_axis_label='Penghasilan (Ton)', plot_width=920, plot_height=680)
 
