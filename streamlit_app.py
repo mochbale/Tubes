@@ -32,7 +32,7 @@ st.write(f"Rata-rata Penghasilan Beras: {avg_production:,.0f} Ton")
 total_production = df.groupby('Area')['Value'].sum().reset_index()
 
 # urutkan negara berdasarkan total penghasilan beras dan ambil tiga negara teratas
-top_countries = total_production.sort_values(by='Value', ascending=False).head(3)
+top_countries = total_production[total_production['Area'].isin(countries)].sort_values(by='Value', ascending=False).head(3)
 
 # tampilkan tiga negara teratas dan total produksi beras mereka
 st.write("Top 3 Negara Penghasil Beras:")
